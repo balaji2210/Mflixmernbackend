@@ -1,19 +1,22 @@
 class WhereClause {
-  constructor(bigQ, query) {
-    this.bigQ = bigQ;
+  constructor(query, queryStr) {
     this.query = query;
+    this.queryStr = queryStr;
   }
 
   search() {
-    const search = this.query.search
+    const search = this.queryStr.search
       ? {
           title: {
-            $regex: this.query.search,
+            $regex: this.queryStr.search,
             $options: "i",
           },
         }
       : {};
-    this.bigQ = this.bigQ.find({ ...search });
+
+    this.query = this.query.find({ ...search });
     return this;
   }
 }
+
+module.exports = WhereClause;

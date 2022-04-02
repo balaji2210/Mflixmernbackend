@@ -2,6 +2,7 @@ const Movie = require("../models/Movie");
 
 const BigPromise = require("../middlewares/Bigpromise");
 const cloudinary = require("cloudinary").v2;
+const WhereClause = require("../utils/whereClause");
 
 exports.createMovie = BigPromise(async (req, res, next) => {
   let result;
@@ -64,7 +65,7 @@ exports.updateMovie = BigPromise(async (req, res, next) => {
 exports.getMovies = BigPromise(async (req, res, next) => {
   const whereClause = new WhereClause(Movie, req.query).search();
 
-  const movies = await whereClause.bigQ;
+  const movies = await whereClause.query;
 
   res.status(200).json({
     success: true,
