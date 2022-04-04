@@ -117,7 +117,7 @@ exports.deleteBanner = BigPromise(async (req, res, next) => {
 	});
 });
 
-exports.trending = BigPromise(async (req, res, next) => {
+exports.getTrending = BigPromise(async (req, res, next) => {
 	let banners = await Banner.find();
 
 	if (!banners) {

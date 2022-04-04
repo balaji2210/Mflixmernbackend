@@ -14,7 +14,7 @@ const bannerSchema = new mongoose.Schema(
 		},
 		is_featured: {
 			type: String,
-			default: "false",
+			default: "true",
 		},
 		user: {
 			type: mongoose.Schema.ObjectId,
