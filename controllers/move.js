@@ -41,7 +41,7 @@ exports.updateMovie = BigPromise(async (req, res, next) => {
   if (req.files) {
     await cloudinary.uploader.destroy(movie.photo.public_id);
 
-    result = await cloudinary.v2.uploader.upload(req.files.photo.tempFilePath, {
+    result = await cloudinary.uploader.upload(req.files.photo.tempFilePath, {
       folder: "movie",
     });
 
@@ -50,7 +50,7 @@ exports.updateMovie = BigPromise(async (req, res, next) => {
     req.body.photo = image;
   }
 
-  movie = await Movie.findById(req.params.id, req.body, {
+  movie = await Movie.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
     useFindAndModify: false,

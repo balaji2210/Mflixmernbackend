@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 exports.isLoggedIn = Bigpromise(async (req, res, next) => {
   const token =
-    req.cookies.token || req.header("Authorization").replace("Bearer ", " ");
+    req.cookies.token || req.header("Authorization").replace("Bearer ", "");
 
   if (!token) {
     return res.status(400).json({
