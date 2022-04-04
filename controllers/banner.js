@@ -118,7 +118,7 @@ exports.deleteBanner = BigPromise(async (req, res, next) => {
 });
 
 exports.trending = BigPromise(async (req, res, next) => {
-	const banners = await Banner.find({ is_featured: "true" });
+	let banners = await Banner.find();
 
 	if (!banners) {
 		return res.status(400).json({
@@ -126,6 +126,10 @@ exports.trending = BigPromise(async (req, res, next) => {
 			message: "No Banner found with Id",
 		});
 	}
+
+	banners = banners.filter((ban) => {
+		return ban.is_featured !== "false";
+	});
 
 	return res.status(200).json({
 		success: true,
